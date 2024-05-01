@@ -1,8 +1,8 @@
 /**
  * @name FreeEmojis
- * @version 1.7
+ * @version 2.0
  * @description Link emojis if you don't have nitro! Type them out or use the emoji picker! [64px]
- * @author An0
+ * @author An0, nk34player
  * @source https://github.com/An00nymushun/DiscordFreeEmojis
  * @updateUrl https://raw.githubusercontent.com/An00nymushun/DiscordFreeEmojis/main/DiscordFreeEmojis64px.plugin.js
  */
@@ -143,7 +143,7 @@ function Start() {
     }
 
     function replaceEmoji(parseResult, emoji) {
-        parseResult.content = parseResult.content.replace(`<${emoji.animated ? "a" : ""}:${emoji.originalName || emoji.name}:${emoji.id}>`, emoji.url.split("?")[0] + "?size=64");
+        parseResult.content = parseResult.content.replace(`<${emoji.animated ? "a" : ""}:${emoji.originalName || emoji.name}:${emoji.id}>`, "https://cdn.discordapp.com/emojis/"+ emoji.id + ".webp" + "?size=64");
     }
 
     parseHook = function() {
@@ -151,6 +151,7 @@ function Start() {
 
         if(result.invalidEmojis.length !== 0) {
             for(let emoji of result.invalidEmojis) {
+                console.log(emoji)
                 replaceEmoji(result, emoji);
             }
             result.invalidEmojis = [];
@@ -185,8 +186,8 @@ return function() { return {
     getName: () => "DiscordFreeEmojis",
     getShortName: () => "FreeEmojis",
     getDescription: () => "Link emojis if you don't have nitro! Type them out or use the emoji picker! [64px]",
-    getVersion: () => "1.7",
-    getAuthor: () => "An0",
+    getVersion: () => "2.0",
+    getAuthor: () => "An0, nk34player",
 
     start: Start,
     stop: Stop
